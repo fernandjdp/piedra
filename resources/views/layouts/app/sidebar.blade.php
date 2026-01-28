@@ -18,6 +18,12 @@
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
+            <flux:sidebar.nav>
+                <flux:sidebar.item icon="folder" :href="route('cashflow')" :current="request()->routeIs('cashflow')" wire:navigate>
+                    {{ __('Cashflow') }}
+                </flux:sidebar.item>
+            </flux:sidebar.nav>
+
             <flux:spacer />
 
             <flux:sidebar.nav>
