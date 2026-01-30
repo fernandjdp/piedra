@@ -10,9 +10,11 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::view('cashflow', 'cashflow')
-->middleware(['auth', 'verified'])
-->name('cashflow');
+Route::livewire('/cashflow', 'pages::cashflow.index')->middleware(['auth', 'verified'])->name('cashflow.index');
+
+// Route::view('cashflow', 'cashflow')
+// ->middleware(['auth', 'verified'])
+// ->name('cashflow');
 
 Route::livewire('/cashflow/create', 'pages::cashflow.create');
 
