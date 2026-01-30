@@ -3,7 +3,7 @@
         <!-- Header con título y botón -->
         <div class="flex items-center justify-between">
             <span class="text-3xl font-bold">{{ __('Cashflow') }}</span>
-            <flux:button>{{ __('Add') }}</flux:button>
+            <flux:button href="/cashflow/create">{{ __('Add') }}</flux:button>
         </div>
 
         <!-- Tabla de registros -->
