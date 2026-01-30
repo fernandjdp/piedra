@@ -1,13 +1,23 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Computed;
+use App\Models\Cashflow;
 
 new class extends Component {
-    public $cashflows = [];
-
-    public function mount()
+    #[Computed]
+    public function cashflows()
     {
-        $this->cashflows = \App\Models\Cashflow::all();
+        return Cashflow::all();
+    }
+
+    public function delete($id)
+    {
+        $cashflow = Cashflow::findOrFail($id);
+
+        //TODO: Authorization check
+
+        $cashflow->delete();
     }
 };
 ?>
@@ -28,9 +38,10 @@ new class extends Component {
                 <flux:table.column>{{ __('Type') }}</flux:table.column>
                 <flux:table.column>{{ __('Status') }}</flux:table.column>
                 <flux:table.column>{{ __('Amount') }}</flux:table.column>
+                <flux:table.column>{{ __('Action') }}</flux:table.column>
             </flux:table.columns>
             <flux:table.rows>
-                @foreach ($cashflows as $cashflow)
+                @foreach ($this->cashflows as $cashflow)
                     <flux:table.row wire:key="{{ $cashflow->id }}">
                         <flux:table.cell>{{ $cashflow->description }}</flux:table.cell>
                         <flux:table.cell>{{ $cashflow->date }}</flux:table.cell>
@@ -48,6 +59,12 @@ new class extends Component {
                             </flux:badge>
                         </flux:table.cell>
                         <flux:table.cell variant="strong">${{ $cashflow->amount }}</flux:table.cell>
+                        <flux:table.cell>
+                            <flux:button size="sm" href="/cashflow/edit/{{ $cashflow->id }}">{{ __('Edit') }}
+                            </flux:button>
+                            <flux:button size="sm" wire:click="delete('{{ $cashflow->id }}')" color="red">
+                                {{ __('Delete') }}</flux:button>
+                        </flux:table.cell>
                     </flux:table.row>
                 @endforeach
             </flux:table.rows>

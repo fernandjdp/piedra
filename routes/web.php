@@ -11,11 +11,7 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::livewire('/cashflow', 'pages::cashflow.index')->middleware(['auth', 'verified'])->name('cashflow.index');
-
-// Route::view('cashflow', 'cashflow')
-// ->middleware(['auth', 'verified'])
-// ->name('cashflow');
-
-Route::livewire('/cashflow/create', 'pages::cashflow.create');
+Route::livewire('/cashflow/create', 'pages::cashflow.create')->middleware(['auth', 'verified'])->name('cashflow.create');
+Route::livewire('/cashflow/edit/{id}', 'pages::cashflow.edit')->middleware(['auth', 'verified'])->name('cashflow.edit');
 
 require __DIR__.'/settings.php';

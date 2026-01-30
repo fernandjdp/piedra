@@ -15,8 +15,6 @@ new class extends Component {
     {
         Cashflow::create($this->only(['description', 'amount', 'type', 'date', 'category', 'fixed']));
 
-        session()->flash('status', 'Cashflow successfully created.');
-
         return $this->redirect('/cashflow');
     }
 };
@@ -55,9 +53,10 @@ new class extends Component {
         </flux:radio.group>
 
         <!-- Frecuencia fija -->
-        <flux:checkbox.group wire:model="fixed" label="{{ __('Frecuency') }}" variant="cards" class="max-sm:flex-col">
-            <flux:checkbox label="Every month" description="Fixed payments every month" />
-        </flux:checkbox.group>
+        <flux:field variant="inline" class="items-center">
+            <flux:checkbox wire:model="fixed" />
+            <flux:label>{{ __('Fixed payment (every month)') }}</flux:label>
+        </flux:field>
 
         <!-- Fecha -->
         <flux:input wire:model="date" label="{{ __('Date') }}" type="date" />
