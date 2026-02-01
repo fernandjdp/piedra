@@ -63,12 +63,10 @@ new class extends Component {
         <flux:input wire:model="date" label="{{ __('Date') }}" type="date" />
 
         <!-- Status -->
-        <flux:table.cell>
-            <flux:select wire:model="status" placeholder="Choose status...">
-                <flux:select.option value="PAID">{{ __('Paid') }}</flux:select.option>
-                <flux:select.option value="PENDING">{{ __('Pending') }}</flux:select.option>
-            </flux:select>
-        </flux:table.cell>
+        <flux:select wire:model="status" placeholder="Choose status..." label="{{ __('Status') }}">
+            <flux:select.option value="PAID">{{ __('Paid') }}</flux:select.option>
+            <flux:select.option value="PENDING">{{ __('Pending') }}</flux:select.option>
+        </flux:select>
     </div>
 
     <!-- Botones de acción -->
