@@ -10,11 +10,12 @@ new class extends Component {
     public $date = '';
     public $category = '';
     public $fixed = false;
+    public $status = 'PENDING';
+    public $currency = 'ARS';
 
     public function create()
     {
-        Cashflow::create($this->only(['description', 'amount', 'type', 'date', 'category', 'fixed']));
-
+        Cashflow::create($this->only(['description', 'amount', 'type', 'date', 'category', 'fixed', 'status', 'currency']));
         return $this->redirect('/cashflow');
     }
 };
@@ -38,7 +39,7 @@ new class extends Component {
             <flux:label>{{ __('Amount') }}</flux:label>
             <flux:input.group>
                 <flux:input wire:model="amount" mask:dynamic="$money($input)" />
-                <flux:select class="max-w-fit">
+                <flux:select wire:model="currency" class="max-w-fit">
                     <flux:select.option selected>ARS</flux:select.option>
                     <flux:select.option>USD</flux:select.option>
                 </flux:select>
@@ -61,8 +62,13 @@ new class extends Component {
         <!-- Fecha -->
         <flux:input wire:model="date" label="{{ __('Date') }}" type="date" />
 
-        <!-- Categoría -->
-        <flux:input label="{{ __('Category') }}" />
+        <!-- Status -->
+        <flux:table.cell>
+            <flux:select wire:model="status" placeholder="Choose status...">
+                <flux:select.option value="PAID">{{ __('Paid') }}</flux:select.option>
+                <flux:select.option value="PENDING">{{ __('Pending') }}</flux:select.option>
+            </flux:select>
+        </flux:table.cell>
     </div>
 
     <!-- Botones de acción -->
