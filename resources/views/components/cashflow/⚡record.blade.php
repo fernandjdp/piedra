@@ -53,7 +53,7 @@ new class extends Component {
             <flux:input wire:model="description" />
         </flux:table.cell>
         <!-- Date -->
-        <flux:table.cell>{{ $this->record->date }}</flux:table.cell>
+        <flux:table.cell>{{ Carbon\Carbon::parse($this->record->date)->format('d/m/Y') }}</flux:table.cell>
         <!-- Type -->
         <flux:table.cell>
             <flux:select wire:model="type" placeholder="Choose type...">
@@ -102,8 +102,10 @@ new class extends Component {
         </flux:table.cell>
         <flux:table.cell variant="strong">{{ $amount }} {{ $currency }}</flux:cell>
             <flux:table.cell>
-                <flux:button size="sm" :loading="false" wire:click="toggleEditing">Editar</flux:button>
-                <flux:button size="sm" wire:click="delete('{{ $record->id }}')" color="red">
+                <flux:button size="sm" :loading="false" wire:click="toggleEditing">{{ __('Edit') }}
+                </flux:button>
+                <flux:button size="sm" wire:click="delete('{{ $record->id }}')"
+                    wire:confirm="Are you sure you want to delete this post?" color="red">
                     {{ __('Delete') }}
                 </flux:button>
             </flux:table.cell>

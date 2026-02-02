@@ -18,6 +18,7 @@ class Cashflow extends Model
     {
         return [
             'fixed' => 'boolean',
+            'date' => 'datetime:d/m/Y',
         ];
     }
 }
