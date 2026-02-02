@@ -1,17 +1,9 @@
 <?php
 
 use Livewire\Component;
-use Livewire\Attributes\On;
 
 new class extends Component {
     public $cashflow;
-    public bool $editing = false;
-
-    #[On('toggle-editing')]
-    public function toggleEditing(): void
-    {
-        $this->editing = !$this->editing;
-    }
 };
 ?>
 
@@ -28,7 +20,7 @@ new class extends Component {
         </flux:table.columns>
         <flux:table.rows>
             @foreach ($this->cashflow as $record)
-                <livewire:cashflow.record :$record :key="$record->id" :editing="$this->editing" />
+                <livewire:cashflow.record :$record :key="$record->id" />
             @endforeach
         </flux:table.rows>
     </flux:table>
