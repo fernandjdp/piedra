@@ -70,7 +70,8 @@ new class extends Component {
     </div>
 
     <!-- Tabla de registros -->
-    <livewire:cashflow.table :cashflow="$this->cashflow" />
+    {{-- <livewire:cashflow.table :cashflow="$this->cashflow" /> --}}
+    <livewire:records.list :cashflow="$this->cashflow" />
 
     <!-- Modal de importar cashflow -->
     <flux:modal name="import-cashflow" class="md:w-96">
