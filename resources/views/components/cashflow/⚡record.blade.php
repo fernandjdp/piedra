@@ -52,8 +52,6 @@ new class extends Component {
         <flux:table.cell>
             <flux:input wire:model="description" />
         </flux:table.cell>
-        <!-- Date -->
-        <flux:table.cell>{{ Carbon\Carbon::parse($this->record->date)->format('d/m/Y') }}</flux:table.cell>
         <!-- Type -->
         <flux:table.cell>
             <flux:select wire:model="type" placeholder="Choose type...">
@@ -89,7 +87,6 @@ new class extends Component {
         </flux:table.cell>
     @else
         <flux:table.cell>{{ $description }}</flux:table.cell>
-        <flux:table.cell>{{ $date }}</flux:table.cell>
         <flux:table.cell>
             <flux:badge :color="$type === 'INCOME' ? 'green' : 'red'" size="sm" inset="top bottom">
                 {{ __(Str::title($type)) }}

@@ -14,7 +14,6 @@ new class extends Component {
     <flux:table>
         <flux:table.columns>
             <flux:table.column>{{ __('Description') }}</flux:table.column>
-            <flux:table.column>{{ __('Date') }}</flux:table.column>
             <flux:table.column>{{ __('Type') }}</flux:table.column>
             <flux:table.column>{{ __('Status') }}</flux:table.column>
             <flux:table.column>{{ __('Amount') }}</flux:table.column>
