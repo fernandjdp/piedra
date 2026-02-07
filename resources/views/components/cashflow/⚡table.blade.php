@@ -1,8 +1,10 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\Reactive;
 
 new class extends Component {
+    #[Reactive]
     public $cashflow;
 };
 ?>

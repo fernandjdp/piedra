@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
-class Cashflow extends Model
+final class Cashflow extends Model
 {
-    //description, amount, type, date, fixed, status, user_id
+    // description, amount, type, date, fixed, status, user_id
     protected $guarded = [];
+
+    protected $dates = ['created_at', 'updated_at', 'date'];
 
     /**
      * Get the attributes that should be cast.
@@ -18,7 +22,7 @@ class Cashflow extends Model
     {
         return [
             'fixed' => 'boolean',
-            'date' => 'datetime:d/m/Y',
+            'date' => 'datetime',
         ];
     }
 }
