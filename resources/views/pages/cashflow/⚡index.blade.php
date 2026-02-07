@@ -37,41 +37,45 @@ new class extends Component {
 };
 ?>
 
-<div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-    <!-- Header con título y botón -->
-    <div class="flex items-center justify-between">
-        <span class="text-3xl font-bold">{{ __('Cashflow') }}</span>
-        <div class="flex justify-between gap-2">
-            <flux:select wire:model.live="monthFilter" placeholder="{{ __('Month') }}">
-                @foreach (range(1, 12) as $monthNumber)
-                    @php
-                        // Creamos un objeto fecha para obtener el nombre del mes traducido
-                        $monthName = \Carbon\Carbon::create(2024, $monthNumber, 1)->translatedFormat('F');
-                    @endphp
-                    <flux:select.option value="{{ sprintf('%02d', $monthNumber) }}">
-                        {{ ucfirst($monthName) }}
-                    </flux:select.option>
-                @endforeach
-            </flux:select>
+<div class="flex h-screen w-full flex-col overflow-hidden bg-white">
+    <div class="flex flex-col flex-1 gap-4 min-h-0">
+        <!-- Header con título y botón -->
+        <div class="flex shrink-0 items-center justify-between">
+            <span class="text-3xl font-bold">{{ __('Cashflow') }}</span>
+            <div class="flex justify-between gap-2">
+                <flux:select wire:model.live="monthFilter" placeholder="{{ __('Month') }}">
+                    @foreach (range(1, 12) as $monthNumber)
+                        @php
+                            // Creamos un objeto fecha para obtener el nombre del mes traducido
+                            $monthName = \Carbon\Carbon::create(2024, $monthNumber, 1)->translatedFormat('F');
+                        @endphp
+                        <flux:select.option value="{{ sprintf('%02d', $monthNumber) }}">
+                            {{ ucfirst($monthName) }}
+                        </flux:select.option>
+                    @endforeach
+                </flux:select>
 
-            <flux:select wire:model.live="yearFilter" placeholder="{{ __('Year') }}">
-                {{-- Genera un rango de años dinámico (ej: 5 atrás, 5 adelante) --}}
-                @foreach (range(now()->year - 10, now()->year + 5) as $year)
-                    <flux:select.option value="{{ $year }}">{{ $year }}</flux:select.option>
-                @endforeach
-            </flux:select>
+                <flux:select wire:model.live="yearFilter" placeholder="{{ __('Year') }}">
+                    {{-- Genera un rango de años dinámico (ej: 5 atrás, 5 adelante) --}}
+                    @foreach (range(now()->year - 10, now()->year + 5) as $year)
+                        <flux:select.option value="{{ $year }}">{{ $year }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            </div>
+            <div>
+                <flux:button href="/cashflow/create">{{ __('Add') }}</flux:button>
+                <flux:modal.trigger name="import-cashflow">
+                    <flux:button>{{ __('Import') }}</flux:button>
+                </flux:modal.trigger>
+            </div>
         </div>
-        <div>
-            <flux:button href="/cashflow/create">{{ __('Add') }}</flux:button>
-            <flux:modal.trigger name="import-cashflow">
-                <flux:button>{{ __('Import') }}</flux:button>
-            </flux:modal.trigger>
+
+        <!-- Tabla de registros -->
+        {{-- <livewire:cashflow.table :cashflow="$this->cashflow" /> --}}
+        <div class="flex-1 min-h-0 relative">
+            <livewire:records.list :cashflow="$this->cashflow" />
         </div>
     </div>
-
-    <!-- Tabla de registros -->
-    {{-- <livewire:cashflow.table :cashflow="$this->cashflow" /> --}}
-    <livewire:records.list :cashflow="$this->cashflow" />
 
     <!-- Modal de importar cashflow -->
     <flux:modal name="import-cashflow" class="md:w-96">
