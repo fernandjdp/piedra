@@ -23,7 +23,7 @@ new class extends Component {
             @endforelse
         </div>
 
-        <div class="flex shrink-0 justify-center py-4">
+        <div class="flex shrink-0 justify-center pt-4">
             <flux:button href="/cashflow/create" icon="plus"></flux:button>
         </div>
     </div>

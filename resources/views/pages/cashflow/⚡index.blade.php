@@ -37,7 +37,7 @@ new class extends Component {
 };
 ?>
 
-<div class="flex h-screen w-full flex-col overflow-hidden bg-white">
+<div class="flex h-full w-full flex-col overflow-hidden">
     <div class="flex flex-col flex-1 gap-4 min-h-0">
         <!-- Header con título y botón -->
         <div class="flex shrink-0 items-center justify-between">
