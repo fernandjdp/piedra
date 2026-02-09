@@ -25,6 +25,8 @@ new class extends Component {
         return Cashflow::query()
             ->whereMonth('date', (int) $this->monthFilter)
             ->whereYear('date', (int) $this->yearFilter)
+            ->orderBy('type', 'desc')
+            ->orderBy('fixed', 'desc')
             ->orderBy('amount', 'desc')
             ->get();
             //->dd();

@@ -8,6 +8,7 @@ new class extends Component {
     public $cashflow;
     public $budgetActualMinusExpenses;
     public $budgetFood = 400;
+    public $totalFixedExpenses;
     public $remainingFoodBudget;
     public $remainingBudget;
     public $remainingExcessBudget;
@@ -23,9 +24,10 @@ new class extends Component {
         $expenses = $this->cashflow->where('type', 'EXPENSE')->sum('amount');
         $income = $this->cashflow->where('type', 'INCOME')->sum('amount');
         $foodExpenses = $this->cashflow->where('type', 'EXPENSE')->where('category', 'FOOD')->sum('amount');
+        $this->totalFixedExpenses = $this->cashflow->where('fixed', true)->where('type', 'EXPENSE')->sum('amount');
         $this->budgetActualMinusExpenses = $income - $expenses;
         $this->remainingFoodBudget = max(0, $this->budgetFood - $foodExpenses); // Ejemplo: presupuesto de comida de 500
-        $this->remainingBudget = max(0, 1000 - $expenses);
+        $this->remainingBudget = max(0, $this->totalFixedExpenses - $expenses);
         $this->remainingExcessBudget = 0;
     }
 };
@@ -79,8 +81,8 @@ new class extends Component {
         <!-- Card 4 -->
         <flux:card class="border-2 border-gray-300">
             <div class="space-y-2">
-                <p class="text-sm font-semibold text-gray-700">{{ __('Remaining excess budget') }}</p>
-                <p class="text-4xl font-bold">{{ $this->remainingExcessBudget }}</p>
+                <p class="text-sm font-semibold text-gray-700">{{ __('Total fixed expenses') }}</p>
+                <p class="text-4xl font-bold">{{ $this->totalFixedExpenses }}</p>
             </div>
         </flux:card>
 

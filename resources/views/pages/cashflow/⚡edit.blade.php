@@ -44,7 +44,7 @@ new class extends Component {
         <flux:field>
             <flux:label>{{ __('Amount') }}</flux:label>
             <flux:input.group>
-                <flux:input wire:model="amount" type="number" mask:dynamic="$money($input)" />
+                <flux:input wire:model="amount" type="number" />
                 <flux:select class="max-w-fit">
                     <flux:select.option selected>ARS</flux:select.option>
                     <flux:select.option>USD</flux:select.option>
