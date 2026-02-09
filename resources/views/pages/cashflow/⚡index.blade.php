@@ -22,7 +22,12 @@ new class extends Component {
     #[Computed]
     public function cashflow()
     {
-        return Cashflow::query()->orderBy('date', 'desc')->whereMonth('date', (int) $this->monthFilter)->whereYear('date', (int) $this->yearFilter)->get();
+        return Cashflow::query()
+            ->whereMonth('date', (int) $this->monthFilter)
+            ->whereYear('date', (int) $this->yearFilter)
+            ->orderBy('amount', 'desc')
+            ->get();
+            //->dd();
     }
 
     public function handleImport(ImportCashflowAction $action)
@@ -71,7 +76,8 @@ new class extends Component {
         </div>
 
         <!-- Tabla de registros -->
-        {{-- <livewire:cashflow.table :cashflow="$this->cashflow" /> --}}
+        {{--
+        <livewire:cashflow.table :cashflow="$this->cashflow" /> --}}
         <div class="flex-1 min-h-0 relative">
             <livewire:records.list :cashflow="$this->cashflow" />
         </div>

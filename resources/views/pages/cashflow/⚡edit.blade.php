@@ -6,7 +6,7 @@ use App\Models\Cashflow;
 new class extends Component {
     public Cashflow $cashflow;
     public $description;
-    public $amount;
+    public float $amount;
     public $type;
     public $date;
     public $category;
@@ -44,7 +44,7 @@ new class extends Component {
         <flux:field>
             <flux:label>{{ __('Amount') }}</flux:label>
             <flux:input.group>
-                <flux:input wire:model="amount" mask:dynamic="$money($input)" />
+                <flux:input wire:model="amount" type="number" mask:dynamic="$money($input)" />
                 <flux:select class="max-w-fit">
                     <flux:select.option selected>ARS</flux:select.option>
                     <flux:select.option>USD</flux:select.option>

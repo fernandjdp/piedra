@@ -21,6 +21,7 @@ final class Cashflow extends Model
     protected function casts(): array
     {
         return [
+            'amount' => 'double',
             'fixed' => 'boolean',
             'date' => 'datetime',
         ];
